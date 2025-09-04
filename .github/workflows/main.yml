@@ -1,7 +1,7 @@
 name: Verify PR with JaCoCo
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 jobs:
