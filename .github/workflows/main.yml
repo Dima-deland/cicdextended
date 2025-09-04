@@ -2,7 +2,7 @@ name: Verify PR with JaCoCo
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ]
 
 jobs:
   test:
