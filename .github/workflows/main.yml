@@ -1,15 +1,15 @@
 name: Verify PR with JaCoCo
 
 on:
-  push:
-    branches: [ "*" ]
+  pull_request:
+    branches: ["*"]
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up JDK 21
@@ -20,3 +20,14 @@ jobs:
 
       - name: Run tests with JaCoCo
         run: mvn clean verify
+
+      - name: Check code coverage
+        run: |
+          COVERAGE=$(mvn jacoco:report | grep -Po 'LINE\s+TOTAL\s+\K\d+(?=%)')
+
+          echo "Line coverage: $COVERAGE%"
+
+          if [ "$COVERAGE" -lt 80 ]; then
+            echo "❌ Code coverage is below 80%!"
+            exit 1
+          fi
