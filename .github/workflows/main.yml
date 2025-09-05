@@ -22,13 +22,5 @@ jobs:
         run: mvn clean verify
 
       - name: Check code coverage
-        run: |
-          COVERAGE=$(mvn jacoco:report | grep -Po 'LINE\s+TOTAL\s+\K\d+(?=%)')
 
-          echo "Line coverage: $COVERAGE%"
-
-          if [ "$COVERAGE" -lt 80 ]; then
-            echo "Code coverage is below 80%!" 
-            echo "Code coverage is below 80%!"
-            exit 1
-          fi
+        run: mvn jacoco:check
