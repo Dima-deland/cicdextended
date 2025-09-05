@@ -28,6 +28,6 @@ jobs:
           echo "Line coverage: $COVERAGE%"
 
           if [ "$COVERAGE" -lt 80 ]; then
-            echo "❌ Code coverage is below 80%!"
+            echo "Code coverage is below 80%!"
             exit 1
           fi
